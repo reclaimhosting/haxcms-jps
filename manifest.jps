@@ -1,0 +1,53 @@
+type: install
+id: haxcms
+name: HAXcms
+baseUrl: https://raw.githubusercontent.com/reclaimhosting/haxcms-jps/master
+logo: images/haxcms-logo.png
+
+description: 
+  text: Headless Authoring eXperience (HAX) is a next generation block editor that works anywhere via web components. HAXcms seeks to be the smallest possible back-end CMS to make HAX work and be able to build websites with it.
+  
+categories:
+- apps/content-management
+
+globals:
+  HAX_ADMIN_PASS: ${fn.password(10)}
+
+nodes:
+  nodeType: apache2
+  nodeGroup: cp
+  cloudlets: 8
+  extip: false
+  displayName: Application Server
+
+onInstall:
+  - configSystem
+  - deployArchive
+  - setupUser
+
+actions:
+  deployArchive:
+    deploy:
+      archive: https://cloud-jps-archives.s3.amazonaws.com/HAXcms-1.2.0.zip
+      name: HAXcms-1.2.0
+      context: ROOT
+
+  configSystem:
+    cmd[cp]: |-
+      sed -i 's|;extension=gd.so|extension=gd.so|g' /etc/php.ini;
+      sudo /etc/init.d/httpd restart;
+    user: root
+    
+  setupUser:
+    cmd[cp]: |-
+      curl -d "user=admin&pass=${globals.HAX_ADMIN_PASS}" -X POST http://${env.domain}/install.php
+     
+ssl: true
+skipNodeEmails: true
+  
+success: | 
+  **Site URL**: [https://${env.domain}/](https://${env.domain}/)
+  
+  **Username**: admin
+  
+  **Password**: ${globals.HAX_ADMIN_PASS}
