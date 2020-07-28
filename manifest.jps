@@ -29,7 +29,7 @@ onInstall:
 actions:
   deployArchive:
     deploy:
-      archive: https://cloud-jps-archives.s3.amazonaws.com/HAXcms-1.2.0.zip
+      archive: https://cloud-jps-archives.s3.amazonaws.com/HAXcms-1.2.11.zip
       name: HAXcms-1.2.0
       context: ROOT
 
