@@ -5,7 +5,7 @@ baseUrl: https://raw.githubusercontent.com/reclaimhosting/haxcms-jps/master
 logo: images/haxcms-logo.png
 
 description: 
-  text: Headless Authoring eXperience (HAX) is a next generation block editor that works anywhere via web components. HAXcms seeks to be the smallest possible back-end CMS to make HAX work and be able to build websites with it.
+  text: Powered by custom HTML tags that work in any system, HAX is a lightweight, easy to use flat file CMS with a powerful design pattern focused on authoring experience in order to build sustainable and engaging content.
   
 categories:
 - apps/content-management
@@ -29,8 +29,8 @@ onInstall:
 actions:
   deployArchive:
     deploy:
-      archive: https://cloud-jps-archives.s3.amazonaws.com/HAXcms-1.4.0.zip
-      name: HAXcms-1.4.0
+      archive: https://github.com/elmsln/HAXcms/archive/refs/tags/7.0.1.zip
+      name: HAXcms-7.0.1
       context: ROOT
 
   configSystem:
