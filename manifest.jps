@@ -29,8 +29,8 @@ onInstall:
 actions:
   deployArchive:
     deploy:
-      archive: https://github.com/elmsln/HAXcms/archive/refs/tags/7.0.1.zip
-      name: HAXcms-7.0.1
+      archive: https://github.com/elmsln/HAXcms/archive/refs/tags/7.0.2.zip
+      name: HAXcms-7.0.2
       context: ROOT
 
   configSystem:
