@@ -1,6 +1,6 @@
 type: install
 id: haxcms
-name: HAXcms
+name: HAX
 baseUrl: https://raw.githubusercontent.com/reclaimhosting/haxcms-jps/master
 logo: images/HAXLogo.png
 
