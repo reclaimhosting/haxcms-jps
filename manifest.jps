@@ -2,7 +2,7 @@ type: install
 id: haxcms
 name: HAXcms
 baseUrl: https://raw.githubusercontent.com/reclaimhosting/haxcms-jps/master
-logo: images/haxcms-logo.png
+logo: images/HAXLogo.png
 
 description: 
   text: Powered by custom HTML tags that work in any system, HAX is a lightweight, easy to use flat file CMS with a powerful design pattern focused on authoring experience in order to build sustainable and engaging content.
