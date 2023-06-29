@@ -23,15 +23,29 @@ nodes:
 
 onInstall:
   - configSystem
-  - deployArchive
+  - deployApp
   - setupUser
 
 actions:
-  deployArchive:
-    deploy:
-      archive: https://github.com/elmsln/HAXcms/archive/refs/tags/7.0.3.zip
-      name: HAXcms-7.0.3
-      context: ROOT
+  deployApp:
+    cmd[cp]: |-
+      # Find version number of latest release
+      function get_latest_release {
+        curl --silent "https://api.github.com/repos/elmsln/HAXcms/releases/latest" |
+        grep '"tag_name":' |
+        sed -E 's/.*"([^"]+)".*/\1/' |
+        sed 's/v//'
+      }
+      LATEST=`get_latest_release`
+      # Download and unzip archive
+      cd /var/www/webroot/ROOT
+      wget https://github.com/elmsln/HAXcms/archive/refs/tags/$LATEST.zip
+      unzip $LATEST.zip
+      cd HAXcms-$LATEST/
+      mv * .[^.]* ..
+      cd ..
+      rm $LATEST.zip
+      rm -r HAXcms-$LATEST/
 
   configSystem:
     cmd[cp]: |-
