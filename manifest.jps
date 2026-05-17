@@ -34,7 +34,7 @@ actions:
         curl --silent "https://api.github.com/repos/haxtheweb/haxcms-php/releases/latest" |
         grep '"tag_name":' |
         sed -E 's/.*"([^"]+)".*/\1/' |
-        sed 's/v//'
+        sed 's/^v//'
       }
       LATEST=`get_latest_release`
       # Download and unzip archive
