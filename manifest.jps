@@ -12,7 +12,8 @@ categories:
 - apps/education
 
 globals:
-  HAX_ADMIN_PASS: ${fn.password(10)}
+  HAX_ADMIN_PASS: ${fn.password(12)}
+  HAX_INSTALL_TOKEN: ${fn.password(32)}
 
 nodes:
   nodeType: apache2
@@ -24,6 +25,7 @@ nodes:
 onInstall:
   - configSystem
   - deployApp
+  - writeInstallToken
   - setupUser
 
 actions:
@@ -53,9 +55,14 @@ actions:
       sudo /etc/init.d/httpd restart;
     user: root
     
+  writeInstallToken:
+    cmd[cp]: |-
+      echo -n "${globals.HAX_INSTALL_TOKEN}" > /var/www/webroot/ROOT/_installtoken.txt;
+      chmod 600 /var/www/webroot/ROOT/_installtoken.txt;
+    
   setupUser:
     cmd[cp]: |-
-      curl -d "user=admin&pass=${globals.HAX_ADMIN_PASS}" -X POST http://${env.domain}/install.php
+      curl -d "user=admin&pass=${globals.HAX_ADMIN_PASS}&install_token=${globals.HAX_INSTALL_TOKEN}" -X POST http://${env.domain}/install.php
      
 ssl: true
 skipNodeEmails: true
